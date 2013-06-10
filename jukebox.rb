@@ -26,6 +26,7 @@ def list
 end
 
 def play song_index = 1
+  puts ""
   puts "playing #{song_index[0] << ": " << $songs[song_index[0].to_i - 1]}"
   prompt_for_action
 end
