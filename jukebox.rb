@@ -11,14 +11,20 @@ $songs = [
 
 def prompt_for_action
   puts ""
-  puts 'What would you like to do next? (You can type "list", "play **song number**", "help", "exit")'
-  action = gets.chomp
+  puts 'What would you like to do next? (You can type "list", "play (song number)", "help", "exit")'
+  action = gets.strip
   args = action.split(" ")
   action = args.shift
-  if args.empty?
-    send action
+  case action
+  when 'list','play','help','exit'
+    if 'play' == action
+      send action, args
+    else
+      send action
+    end
   else
-    send action, args
+    puts "#{action} is an unrecognized command!"
+    return prompt_for_action
   end
 end
 
@@ -29,8 +35,16 @@ def list
   prompt_for_action
 end
 
-def play song_index = ["1"]
+def play song_index = [1]
   puts ""
+  song_index = song_index[0].to_s
+  if song_index.to_i.to_s != song_index
+    puts "Enter a valid number!"
+    prompt_for_action
+  elsif song_index.to_i > $songs.length || song_index.to_i < 1
+    puts "That song number doesn't exist!"
+    prompt_for_action
+  end
   puts "playing #{song_index[0] << ": " << $songs[song_index[0].to_i - 1]}"
   prompt_for_action
 end
@@ -41,6 +55,7 @@ def help
 end
 
 def exit
+  puts "\nSee ya!"
 end
 
 greeting = <<'TADA'
