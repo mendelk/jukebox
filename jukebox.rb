@@ -11,7 +11,7 @@ $songs = [
 
 def prompt_for_action
   puts "\n"
-  puts 'What would you like to do next? (You can type "list", "play", "help", "exit")'
+  puts 'What would you like to do next? (You can type "list", "play **song number**", "help", "exit")'
   action = gets.chomp
   args = action.split(" ")
   action = args.shift
