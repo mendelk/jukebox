@@ -17,7 +17,7 @@ def prompt_for_action
   action = args.shift
   case action
   when 'list','play','help','exit'
-    if 'play' == action
+    if 'play' == action && !args.empty?
       send action, args
     else
       send action
@@ -52,7 +52,7 @@ end
 def help
   puts 'RTFM'
   prompt_for_action
-end
+  end
 
 def exit
   puts "\nSee ya!"
