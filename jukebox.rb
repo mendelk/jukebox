@@ -10,12 +10,16 @@ $songs = [
 # list, play, help, exit
 
 def prompt_for_action
-  puts "\n"
+  puts ""
   puts 'What would you like to do next? (You can type "list", "play **song number**", "help", "exit")'
   action = gets.chomp
   args = action.split(" ")
   action = args.shift
-  send action, *args
+  if args.empty?
+    send action
+  else
+    send action, args
+  end
 end
 
 def list
@@ -25,7 +29,7 @@ def list
   prompt_for_action
 end
 
-def play song_index = 1
+def play song_index = ["1"]
   puts ""
   puts "playing #{song_index[0] << ": " << $songs[song_index[0].to_i - 1]}"
   prompt_for_action
